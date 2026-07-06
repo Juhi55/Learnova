@@ -116,30 +116,50 @@ Answer only using the document.
 const generateTopicContent = async (topic) => {
   const completion = await groq.chat.completions.create({
     model: "llama-3.3-70b-versatile",
+    temperature: 0.9,
     messages: [
       {
         role: "user",
         content: `
-You are an AI Teacher.
+You are an expert AI Teacher.
 
 Topic: ${topic}
 
-Generate:
-1. Detailed Summary
-2. 10 MCQ Questions
-3. 10 Flashcards
+Generate educational content.
 
-Return ONLY valid JSON in this exact format:
+Requirements:
+
+1. Detailed Summary (300-500 words)
+
+2. Generate EXACTLY 40 UNIQUE multiple-choice questions.
+
+Rules:
+- Cover beginner, intermediate and advanced concepts.
+- No duplicate questions.
+- Every question must have 4 options.
+- Exactly one correct answer.
+- Questions should test conceptual understanding.
+
+3. Generate EXACTLY 20 flashcards.
+
+Return ONLY valid JSON.
 
 {
   "summary": "...",
+
   "quiz": [
     {
       "question": "...",
-      "options": ["...", "...", "...", "..."],
+      "options": [
+        "...",
+        "...",
+        "...",
+        "..."
+      ],
       "answer": "..."
     }
   ],
+
   "flashcards": [
     {
       "front": "...",
