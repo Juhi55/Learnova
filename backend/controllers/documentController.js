@@ -15,7 +15,7 @@ const uploadDocument = async (req, res) => {
 
     console.log("FILE PATH FROM MULTER:", req.file.path);
 
-    const extractedText = await extractPdfText(req.file.path);
+    const extractedText = await extractPdfText(req.file.buffer);
 
     console.log("FINAL EXTRACTED TEXT LENGTH:", extractedText?.length);
 
