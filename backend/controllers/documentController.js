@@ -22,7 +22,7 @@ const uploadDocument = async (req, res) => {
     const document = await Document.create({
       userId: req.user.id,
       fileName: req.file.originalname,
-      filePath: req.file.path,
+      filePath: "",
       fileType: req.file.mimetype,
       fileSize: req.file.size,
       extractedText: extractedText || "",
