@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import Layout from "../components/Layout";
 
-const API = "http://localhost:5000/api";
+const API = "https://learnova-backend-9yuu.onrender.com/api";
 
 const authHeader = () => ({
   headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },

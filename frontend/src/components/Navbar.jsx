@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useTheme } from "../context/ThemeContext";
 
-const API = "http://localhost:5000/api";
+const API = "https://learnova-backend-9yuu.onrender.com/api";
 const authHeader = () => ({
   headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
 });
