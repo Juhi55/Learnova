@@ -197,6 +197,7 @@ function StudyBackground() {
       {BG_ITEMS.map((item, i) => (
         <div
           key={i}
+          className="bg-item"
           style={{
             position: "absolute",
             left: `${item.x}%`,
@@ -290,6 +291,8 @@ export default function Landing() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
         *{box-sizing:border-box;margin:0;padding:0;}
+        html{-webkit-text-size-adjust:100%;}
+        img,svg{max-width:100%;}
         @keyframes bgFloat {
           0%,100%{transform:translateY(0) rotate(var(--rot,0deg));}
           50%{transform:translateY(-12px) rotate(var(--rot,0deg));}
@@ -325,6 +328,36 @@ export default function Landing() {
         .btn-hp:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(99,102,241,.55)!important;}
         .btn-hg:hover{background:rgba(255,255,255,.12)!important;color:#fff!important;}
         .prev-line{height:4px;border-radius:4px;background:rgba(255,255,255,.1);margin-bottom:5px;}
+
+        /* ── Responsive overrides ── */
+        @media (max-width: 1024px) {
+          .features-grid, .steps-grid { grid-template-columns: repeat(2,1fr) !important; }
+        }
+        @media (max-width: 900px) {
+          .stats-grid { gap:28px !important; }
+        }
+        @media (max-width: 768px) {
+          nav { padding: 0 20px !important; }
+          .nav-links { display: none !important; }
+          .nav-buttons button { padding: 7px 14px !important; font-size: 12px !important; }
+          .connector-line { display: none !important; }
+          .features-grid, .steps-grid { grid-template-columns: 1fr !important; }
+          .stats-grid { grid-template-columns: repeat(2,1fr) !important; gap:32px 20px !important; }
+          section { padding-left: 24px !important; padding-right: 24px !important; }
+          .preview-grid { grid-template-columns: 1fr !important; }
+          .hero-section { padding-top: 90px !important; }
+          .hero-actions { width: 100%; }
+          .hero-actions button { width: 100% !important; justify-content: center !important; }
+          .preview-card { padding: 18px !important; }
+          .test-card { padding: 26px 20px !important; }
+          .footer-content { flex-direction: column !important; text-align: center !important; gap: 14px !important; }
+        }
+        @media (max-width: 480px) {
+          .bg-item { display: none !important; }
+          .logo-text { font-size: 17px !important; }
+          .stat-num { font-size: 30px !important; }
+          .preview-grid { gap: 10px !important; }
+        }
       `}</style>
 
       {/* ── Study background ── */}
@@ -340,18 +373,18 @@ export default function Landing() {
         borderBottom:"1px solid rgba(129,140,248,.12)",
         transition:"background .3s",
       }}>
-        <div style={{ display:"flex",alignItems:"center",gap:10,fontSize:20,fontWeight:800,color:"#fff",letterSpacing:"-0.5px" }}>
+        <div className="logo-text" style={{ display:"flex",alignItems:"center",gap:10,fontSize:20,fontWeight:800,color:"#fff",letterSpacing:"-0.5px" }}>
           <div style={{ width:34,height:34,background:"linear-gradient(135deg,#6366f1,#8b5cf6)",borderRadius:10,display:"flex",alignItems:"center",justifyContent:"center",fontSize:16,boxShadow:"0 4px 14px rgba(99,102,241,.4)" }}>📖</div>
           Learnova
         </div>
 
-        <ul style={{ display:"flex",gap:32,listStyle:"none" }}>
+        <ul className="nav-links" style={{ display:"flex",gap:32,listStyle:"none" }}>
           {[["Features","#features"],["How it works","#how"],["Testimonials","#testimonials"]].map(([l,h])=>(
             <li key={l}><a href={h} className="nav-a">{l}</a></li>
           ))}
         </ul>
 
-        <div style={{ display:"flex",gap:10,alignItems:"center" }}>
+        <div className="nav-buttons" style={{ display:"flex",gap:10,alignItems:"center" }}>
           <button
   onClick={() => navigate("/login")}
   className="btn-gst"
@@ -390,7 +423,7 @@ export default function Landing() {
 </div>
 </nav>
       {/* ── HERO ── */}
-      <section style={{ position:"relative",minHeight:"100vh",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",textAlign:"center",padding:"100px 40px 60px",zIndex:1 }}>
+      <section className="hero-section" style={{ position:"relative",minHeight:"100vh",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",textAlign:"center",padding:"100px 40px 60px",zIndex:1 }}>
 
         {/* Radial glow */}
         <div style={{ position:"absolute",top:"50%",left:"50%",transform:"translate(-50%,-50%)",width:700,height:500,background:"radial-gradient(ellipse,rgba(99,102,241,.2) 0%,rgba(139,92,246,.08) 50%,transparent 80%)",pointerEvents:"none",borderRadius:"50%" }} />
@@ -401,18 +434,18 @@ export default function Landing() {
           AI-powered study assistant
         </div>
 
-        <h1 style={{ fontSize:"clamp(42px,6vw,68px)",fontWeight:900,lineHeight:1.05,letterSpacing:"-2.5px",marginBottom:22,color:"#fff" }}>
+        <h1 style={{ fontSize:"clamp(36px,8vw,68px)",fontWeight:900,lineHeight:1.05,letterSpacing:"-2.5px",marginBottom:22,color:"#fff" }}>
           Study smarter<br />
           <span style={{ background:"linear-gradient(135deg,#818cf8 0%,#c084fc 50%,#f472b6 100%)",WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent",backgroundClip:"text" }}>with AI</span>
         </h1>
 
-        <p style={{ fontSize:18,color:"rgba(255,255,255,.55)",maxWidth:540,lineHeight:1.7,marginBottom:40,fontWeight:400 }}>
+        <p style={{ fontSize:"clamp(15px,4vw,18px)",color:"rgba(255,255,255,.55)",maxWidth:540,lineHeight:1.7,marginBottom:40,fontWeight:400 }}>
           Transform any PDF into summaries, quizzes, and flashcards in seconds.
           Your personal AI tutor is available 24/7.
         </p>
 
-        <div style={{ display:"flex",gap:14,justifyContent:"center",marginBottom:64,flexWrap:"wrap" }}>
-          <button  onClick={() => navigate("/register")} className="btn-hp" style={{ background:"linear-gradient(135deg,#6366f1,#8b5cf6)",border:"none",color:"#fff",padding:"15px 32px",borderRadius:14,fontSize:15,fontWeight:700,cursor:"pointer",fontFamily:"inherit",boxShadow:"0 8px 30px rgba(99,102,241,.4)",display:"flex",alignItems:"center",gap:8 }}>
+        <div className="hero-actions" style={{ display:"flex",gap:14,justifyContent:"center",marginBottom:64,flexWrap:"wrap" }}>
+          <button  onClick={() => navigate("/register")} className="btn-hp" style={{ background:"linear-gradient(135deg,#6366f1,#8b5cf6)",border:"none",color:"#fff",padding:"15px 32px",borderRadius:14,fontSize:15,fontWeight:700,cursor:"pointer",fontFamily:"inherit",boxShadow:"0 8px 30px rgba(99,102,241,.4)",display:"flex",alignItems:"center",justifyContent:"center",gap:8 }}>
             Start learning free <span>→</span>
           </button>
           <button  onClick={() => navigate("/login")} className="btn-hg" style={{ background:"rgba(255,255,255,.07)",border:"1px solid rgba(255,255,255,.15)",color:"rgba(255,255,255,.8)",padding:"15px 32px",borderRadius:14,fontSize:15,fontWeight:600,cursor:"pointer",fontFamily:"inherit",backdropFilter:"blur(10px)" }}>
@@ -421,7 +454,7 @@ export default function Landing() {
         </div>
 
         {/* App preview card */}
-        <div style={{ background:"rgba(255,255,255,.05)",border:"1px solid rgba(255,255,255,.1)",borderRadius:24,padding:24,maxWidth:680,width:"100%",backdropFilter:"blur(20px)",position:"relative",margin:"0 auto",boxShadow:"0 40px 80px rgba(0,0,0,.4)" }}>
+        <div className="preview-card" style={{ background:"rgba(255,255,255,.05)",border:"1px solid rgba(255,255,255,.1)",borderRadius:24,padding:24,maxWidth:680,width:"100%",backdropFilter:"blur(20px)",position:"relative",margin:"0 auto",boxShadow:"0 40px 80px rgba(0,0,0,.4)" }}>
 
           <div style={{ position:"absolute",top:-12,left:-12,background:"#10b981",color:"#fff",fontSize:10,fontWeight:700,padding:"5px 10px",borderRadius:100,boxShadow:"0 4px 12px rgba(16,185,129,.4)",animation:"chipBounce 2s ease-in-out infinite",whiteSpace:"nowrap" }}>✅ Generated in 3s</div>
           <div style={{ position:"absolute",bottom:-12,right:-12,background:"#8b5cf6",color:"#fff",fontSize:10,fontWeight:700,padding:"5px 10px",borderRadius:100,boxShadow:"0 4px 12px rgba(139,92,246,.4)",animation:"chipBounce 2s .5s ease-in-out infinite",whiteSpace:"nowrap" }}>🧠 10 questions ready</div>
@@ -435,7 +468,7 @@ export default function Landing() {
             </div>
           </div>
 
-          <div style={{ display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:14 }}>
+          <div className="preview-grid" style={{ display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:14 }}>
             {[
               { icon:"📝",label:"AI summary",  bg:"rgba(16,185,129,.08)",  bd:"rgba(16,185,129,.25)" },
               { icon:"🧠",label:"Smart quiz",  bg:"rgba(139,92,246,.08)",  bd:"rgba(139,92,246,.25)" },
@@ -455,10 +488,10 @@ export default function Landing() {
 
       {/* ── STATS ── */}
       <section style={{ position:"relative",zIndex:1,background:"linear-gradient(135deg,#6366f1,#7c3aed)",padding:"56px 40px" }}>
-        <div style={{ maxWidth:900,margin:"0 auto",display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:40,textAlign:"center" }}>
+        <div className="stats-grid" style={{ maxWidth:900,margin:"0 auto",display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:40,textAlign:"center" }}>
           {STATS.map((s,i)=>(
             <FadeUp key={i} delay={i*100}>
-              <div style={{ fontSize:40,fontWeight:900,color:"#fff",letterSpacing:"-1.5px",lineHeight:1,marginBottom:6 }}>
+              <div className="stat-num" style={{ fontSize:40,fontWeight:900,color:"#fff",letterSpacing:"-1.5px",lineHeight:1,marginBottom:6 }}>
                 <AnimatedCounter value={s.value} suffix={s.suffix} />
               </div>
               <div style={{ fontSize:13,color:"rgba(255,255,255,.7)",fontWeight:500 }}>{s.label}</div>
@@ -477,7 +510,7 @@ export default function Landing() {
               Learnova combines powerful AI tools into one seamless, distraction-free study experience.
             </p>
           </FadeUp>
-          <div style={{ display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:20 }}>
+          <div className="features-grid" style={{ display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:20 }}>
             {FEATURES.map((f,i)=>(
               <FadeUp key={i} delay={i*80}>
                 <div className="feat-card">
@@ -498,9 +531,9 @@ export default function Landing() {
             <span className="s-tag tag-p">How it works</span>
             <h2 style={{ fontSize:"clamp(28px,4vw,42px)",fontWeight:900,letterSpacing:"-1.5px",color:"#fff",lineHeight:1.1 }}>Three steps to smarter studying</h2>
           </FadeUp>
-          <div style={{ display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:16,position:"relative" }}>
+          <div className="steps-grid" style={{ display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:16,position:"relative" }}>
             {/* Connector line */}
-            <div style={{ position:"absolute",top:52,left:"calc(16.67% + 26px)",right:"calc(16.67% + 26px)",height:1,background:"linear-gradient(90deg,rgba(99,102,241,.5),rgba(139,92,246,.5))",pointerEvents:"none" }} />
+            <div className="connector-line" style={{ position:"absolute",top:52,left:"calc(16.67% + 26px)",right:"calc(16.67% + 26px)",height:1,background:"linear-gradient(90deg,rgba(99,102,241,.5),rgba(139,92,246,.5))",pointerEvents:"none" }} />
             {STEPS.map((s,i)=>(
               <FadeUp key={i} delay={i*150}>
                 <div className="step-card">
@@ -527,7 +560,7 @@ export default function Landing() {
           <FadeUp>
             <div style={{ position:"relative",minHeight:250,maxWidth:640,margin:"0 auto" }}>
               {TESTIMONIALS.map((t,i)=>(
-                <div key={i} style={{
+                <div key={i} className="test-card" style={{
                   background:"rgba(255,255,255,.04)",
                   border:"1px solid rgba(255,255,255,.1)",
                   borderRadius:24,padding:36,textAlign:"center",
@@ -566,7 +599,7 @@ export default function Landing() {
         <FadeUp>
           <h2 style={{ fontSize:"clamp(32px,5vw,52px)",fontWeight:900,letterSpacing:"-2px",color:"#fff",marginBottom:16,position:"relative" }}>Ready to study smarter?</h2>
           <p style={{ fontSize:17,color:"rgba(255,255,255,.45)",marginBottom:44,position:"relative" }}>Join 10,000+ students already using Learnova to ace their exams.</p>
-          <div style={{ display:"flex",gap:14,justifyContent:"center",flexWrap:"wrap" }}>
+          <div className="hero-actions" style={{ display:"flex",gap:14,justifyContent:"center",flexWrap:"wrap" }}>
             <button
   onClick={() => navigate("/register")}
   className="btn-hp"
@@ -583,6 +616,7 @@ export default function Landing() {
     boxShadow:"0 8px 30px rgba(99,102,241,.4)",
     display:"flex",
     alignItems:"center",
+    justifyContent:"center",
     gap:8
   }}
 >
@@ -612,7 +646,7 @@ export default function Landing() {
       </section>
 
       {/* ── FOOTER ── */}
-      <footer style={{ position:"relative",zIndex:1,background:"#070712",borderTop:"1px solid rgba(255,255,255,.06)",padding:"32px 40px",display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:16 }}>
+      <footer className="footer-content" style={{ position:"relative",zIndex:1,background:"#070712",borderTop:"1px solid rgba(255,255,255,.06)",padding:"32px 40px",display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:16 }}>
         <div style={{ display:"flex",alignItems:"center",gap:8,fontSize:16,fontWeight:800,color:"#fff" }}>
           <div style={{ width:28,height:28,background:"linear-gradient(135deg,#6366f1,#8b5cf6)",borderRadius:8,display:"flex",alignItems:"center",justifyContent:"center",fontSize:13 }}>📖</div>
           Learnova
